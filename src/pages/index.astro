@@ -93,8 +93,29 @@ const faqs = [
 
     <main id="top">
         <!-- Hero -->
-        <section class="pattern relative overflow-hidden">
-            <div class="mx-auto max-w-6xl px-5 py-24 text-center sm:py-32">
+        <section id="hero-banner" class="pattern relative overflow-hidden" aria-roledescription="carousel" aria-label="صور من أعمال الشيخ">
+            <div class="absolute inset-0" aria-hidden="true">
+                {gallery.map((src, i) => (
+                    <img
+                        src={src}
+                        alt=""
+                        class:list={['hero-slide', { 'is-active': i === 0 }]}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        fetchpriority={i === 0 ? 'high' : 'auto'}
+                        decoding="async"
+                    />
+                ))}
+                <div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/65 to-ink"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,106,0.12),transparent_70%)]"></div>
+            </div>
+            <button type="button" id="hero-prev" aria-label="الصورة السابقة" class="hero-arrow right-3 sm:right-5">&#8250;</button>
+            <button type="button" id="hero-next" aria-label="الصورة التالية" class="hero-arrow left-3 sm:left-5">&#8249;</button>
+            <div id="hero-dots" class="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+                {gallery.map((_, i) => (
+                    <button type="button" aria-label={`الصورة ${i + 1}`} class:list={['hero-dot', { 'is-active': i === 0 }]} data-slide={i}></button>
+                ))}
+            </div>
+            <div class="relative z-[1] mx-auto max-w-6xl px-5 py-24 text-center sm:py-32">
                 <p class="font-display text-2xl text-gold-soft">بسم الله الرحمن الرحيم</p>
                 <h1 class="mt-6 font-display text-5xl font-bold leading-tight sm:text-7xl">
                     <span class="gold-text">{sheikh}</span>
@@ -292,6 +313,36 @@ const faqs = [
     </div>
 
     <script>
+        const hero = document.getElementById('hero-banner')!;
+        const slides = Array.from(hero.querySelectorAll<HTMLImageElement>('.hero-slide'));
+        const dots = Array.from(hero.querySelectorAll<HTMLButtonElement>('.hero-dot'));
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let current = 0;
+        let timer: number | undefined;
+        const show = (n: number) => {
+            current = (n + slides.length) % slides.length;
+            slides.forEach((s, i) => s.classList.toggle('is-active', i === current));
+            dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+            const next = slides[(current + 1) % slides.length];
+            if (next.loading === 'lazy') next.loading = 'eager';
+        };
+        const stop = () => window.clearInterval(timer);
+        const start = () => { stop(); if (!reduceMotion) timer = window.setInterval(() => show(current + 1), 5000); };
+        document.getElementById('hero-next')!.addEventListener('click', () => { show(current + 1); start(); });
+        document.getElementById('hero-prev')!.addEventListener('click', () => { show(current - 1); start(); });
+        dots.forEach((d) => d.addEventListener('click', () => { show(Number(d.dataset.slide)); start(); }));
+        hero.addEventListener('mouseenter', stop);
+        hero.addEventListener('mouseleave', start);
+        let touchX = 0;
+        hero.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+        hero.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchX;
+            if (Math.abs(dx) > 50) { show(dx > 0 ? current + 1 : current - 1); start(); }
+        });
+        document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+        show(0);
+        start();
+
         const lb = document.getElementById('lightbox')!;
         const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
         const closeLb = () => { lb.classList.add('hidden'); lb.classList.remove('flex'); };
