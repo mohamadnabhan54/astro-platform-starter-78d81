@@ -1,19 +1,230 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const sheikh = 'الشيخ حسن أبو طالب';
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const nav = [
+    { href: '#services', label: 'الخدمات' },
+    { href: '#about', label: 'عن الشيخ' },
+    { href: '#steps', label: 'خطوات التواصل' },
+    { href: '#faq', label: 'أسئلة شائعة' },
+    { href: '#contact', label: 'تواصل معنا' }
+];
+
+const services = [
+    { icon: '✦', title: 'فك السحر', text: 'الكشف عن أعراض السحر بأنواعه، والعمل على فكّه وإبطال أثره بالرقية والأذكار والتحصين.' },
+    { icon: '☾', title: 'علاج السحر', text: 'برنامج علاجي متكامل يشمل الرقية الشرعية والتحصين اليومي ومتابعة الحالة حتى الاطمئنان.' },
+    { icon: '♥', title: 'جلب الحبيب', text: 'إصلاح ما انقطع بين القلوب، وتقريب المودة والمحبة بين المتحابين بالطرق الروحانية.' },
+    { icon: '❖', title: 'رد المطلقة', text: 'المساعدة في لمّ شمل الأسرة، وإزالة أسباب الخلاف والنفور، وعودة الوئام بين الزوجين.' },
+    { icon: '◈', title: 'علاج العين والحسد', text: 'تشخيص أعراض العين والحسد، والرقية والتحصين لرفع أثرها عن النفس والبيت والرزق.' },
+    { icon: '✧', title: 'تيسير الزواج والرزق', text: 'إزالة العوائق وتأخر الزواج، وفتح أبواب الرزق والتوفيق بإذن الله.' }
+];
+
+const steps = [
+    { n: '١', title: 'تواصل معنا', text: 'املأ النموذج أو راسلنا واذكر حالتك باختصار.' },
+    { n: '٢', title: 'تشخيص الحالة', text: 'يستمع الشيخ لتفاصيل حالتك بسرّية تامة ويحدد طبيعتها.' },
+    { n: '٣', title: 'خطة العلاج', text: 'تحصل على خطة واضحة تناسب حالتك مع التوجيهات اللازمة.' },
+    { n: '٤', title: 'المتابعة', text: 'متابعة مستمرة معك حتى تطمئن على استقرار حالتك.' }
+];
+
+const faqs = [
+    { q: 'هل التواصل سرّي؟', a: 'نعم، جميع المعلومات والحالات تُعامل بسرّية تامة ولا يُطّلع عليها أحد.' },
+    { q: 'هل يمكن العلاج عن بُعد؟', a: 'نعم، يمكن التواصل والمتابعة عن بُعد من أي بلد عبر الهاتف أو الرسائل.' },
+    { q: 'كم تستغرق مدة العلاج؟', a: 'تختلف المدة من حالة إلى أخرى حسب طبيعتها، ويتم توضيح ذلك بعد تشخيص الحالة.' },
+    { q: 'ما المعلومات التي أحتاج لتقديمها؟', a: 'وصف مختصر للحالة والأعراض، وطريقة التواصل المفضلة لديك. لا نطلب أي معلومات لا تخص الحالة.' }
+];
 ---
 
-<Layout title="bye">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title={`${sheikh} | روحانيات وفك السحر وعلاجه`}>
+    <header class="sticky top-0 z-50 border-b border-gold/15 bg-ink/80 backdrop-blur">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+            <a href="#top" class="flex items-center gap-3 no-underline">
+                <img src="/favicon.svg" alt="" class="h-10 w-10" />
+                <span class="font-display text-xl font-bold gold-text">{sheikh}</span>
+            </a>
+            <nav class="hidden gap-7 text-sm md:flex">
+                {nav.map((n) => <a href={n.href} class="text-white/75 transition hover:text-gold">{n.label}</a>)}
+            </nav>
+            <a href="#contact" class="btn !px-5 !py-2 text-sm">احجز استشارة</a>
+        </div>
+    </header>
+
+    <main id="top">
+        <!-- Hero -->
+        <section class="pattern relative overflow-hidden">
+            <div class="mx-auto max-w-6xl px-5 py-24 text-center sm:py-32">
+                <p class="font-display text-2xl text-gold-soft">بسم الله الرحمن الرحيم</p>
+                <h1 class="mt-6 font-display text-5xl font-bold leading-tight sm:text-7xl">
+                    <span class="gold-text">{sheikh}</span>
+                </h1>
+                <p class="mt-4 text-xl text-white/80 sm:text-2xl">للروحانيات وفك السحر وعلاجه</p>
+                <p class="mx-auto mt-6 max-w-2xl leading-loose text-white/65">
+                    خبرة طويلة في الرقية والعلاج الروحاني، فك السحر وعلاجه، جلب الحبيب، رد المطلقة، وعلاج العين والحسد — بسرّية تامة ومتابعة شخصية لكل حالة.
+                </p>
+                <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <a href="#contact" class="btn">تواصل مع الشيخ الآن</a>
+                    <a href="#services" class="btn-outline">تعرّف على الخدمات</a>
+                </div>
+                <div class="mx-auto mt-16 grid max-w-3xl grid-cols-3 gap-4 text-center">
+                    <div><p class="font-display text-3xl gold-text">سرّية</p><p class="mt-1 text-sm text-white/55">تامة لكل الحالات</p></div>
+                    <div><p class="font-display text-3xl gold-text">متابعة</p><p class="mt-1 text-sm text-white/55">شخصية مستمرة</p></div>
+                    <div><p class="font-display text-3xl gold-text">عن بُعد</p><p class="mt-1 text-sm text-white/55">من أي مكان</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="mx-auto max-w-6xl scroll-mt-24 px-5 py-24">
+            <div class="text-center">
+                <p class="text-sm tracking-widest text-gold">خدماتنا</p>
+                <h2 class="mt-3 font-display text-4xl font-bold sm:text-5xl">مجالات العلاج الروحاني</h2>
+            </div>
+            <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {services.map((s) => (
+                    <article class="card">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-2xl text-gold">{s.icon}</div>
+                        <h3 class="mt-5 font-display text-2xl font-bold text-gold-soft">{s.title}</h3>
+                        <p class="mt-3 leading-loose text-white/65">{s.text}</p>
+                    </article>
+                ))}
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="scroll-mt-24 border-y border-gold/15 bg-deep/60">
+            <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-24 md:grid-cols-2">
+                <div class="pattern flex aspect-square items-center justify-center rounded-3xl border border-gold/25">
+                    <div class="text-center">
+                        <p class="font-display text-8xl gold-text">ح</p>
+                        <p class="mt-4 font-display text-3xl text-gold-soft">{sheikh}</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm tracking-widest text-gold">عن الشيخ</p>
+                    <h2 class="mt-3 font-display text-4xl font-bold">من هو {sheikh}؟</h2>
+                    <p class="mt-6 leading-loose text-white/70">
+                        {sheikh} مختص في الروحانيات والرقية والعلاج الروحاني، يستقبل الحالات من مختلف البلدان ويتعامل مع كل حالة باهتمام وسرّية، ويحرص على الاستماع الجيد وفهم تفاصيل المشكلة قبل تحديد طريقة العلاج.
+                    </p>
+                    <ul class="mt-8 space-y-4">
+                        {['استماع كامل لتفاصيل حالتك دون أحكام', 'خطة علاج واضحة ومتابعة حتى الاطمئنان', 'الحفاظ التام على خصوصيتك وأسرارك', 'إمكانية التواصل والعلاج عن بُعد'].map((t) => (
+                            <li class="flex items-start gap-3"><span class="mt-1 text-gold">✦</span><span class="text-white/80">{t}</span></li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps -->
+        <section id="steps" class="mx-auto max-w-6xl scroll-mt-24 px-5 py-24">
+            <div class="text-center">
+                <p class="text-sm tracking-widest text-gold">كيف نبدأ</p>
+                <h2 class="mt-3 font-display text-4xl font-bold sm:text-5xl">خطوات التواصل والعلاج</h2>
+            </div>
+            <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {steps.map((s) => (
+                    <div class="card text-center">
+                        <p class="font-display text-5xl gold-text">{s.n}</p>
+                        <h3 class="mt-4 text-xl font-bold text-gold-soft">{s.title}</h3>
+                        <p class="mt-2 text-sm leading-loose text-white/60">{s.text}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="scroll-mt-24 border-y border-gold/15 bg-deep/60">
+            <div class="mx-auto max-w-3xl px-5 py-24">
+                <h2 class="text-center font-display text-4xl font-bold">أسئلة شائعة</h2>
+                <div class="mt-12 space-y-4">
+                    {faqs.map((f) => (
+                        <details class="group rounded-2xl border border-gold/20 bg-ink/50 p-6 open:border-gold/50">
+                            <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-bold text-gold-soft">
+                                {f.q}
+                                <span class="text-gold transition group-open:rotate-45">+</span>
+                            </summary>
+                            <p class="mt-4 leading-loose text-white/65">{f.a}</p>
+                        </details>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="pattern scroll-mt-24">
+            <div class="mx-auto max-w-2xl px-5 py-24">
+                <div class="text-center">
+                    <p class="text-sm tracking-widest text-gold">تواصل معنا</p>
+                    <h2 class="mt-3 font-display text-4xl font-bold sm:text-5xl">احجز استشارتك</h2>
+                    <p class="mt-4 text-white/65">اكتب حالتك باختصار وسيتواصل معك الشيخ في أقرب وقت. جميع البيانات سرّية.</p>
+                </div>
+
+                <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card mt-10 space-y-5 hover:!translate-y-0">
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p class="hidden"><label>لا تملأ هذا الحقل: <input name="bot-field" /></label></p>
+                    <div class="grid gap-5 sm:grid-cols-2">
+                        <label class="block">
+                            <span class="mb-2 block text-sm text-gold-soft">الاسم</span>
+                            <input name="name" required class="field" placeholder="اسمك" />
+                        </label>
+                        <label class="block">
+                            <span class="mb-2 block text-sm text-gold-soft">رقم الهاتف / واتساب</span>
+                            <input name="phone" type="tel" dir="ltr" required class="field text-right" placeholder="+966 5x xxx xxxx" />
+                        </label>
+                    </div>
+                    <label class="block">
+                        <span class="mb-2 block text-sm text-gold-soft">نوع الحالة</span>
+                        <select name="service" class="field">
+                            {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm text-gold-soft">وصف الحالة</span>
+                        <textarea name="message" rows="5" required class="field" placeholder="اكتب تفاصيل حالتك باختصار..."></textarea>
+                    </label>
+                    <button type="submit" class="btn w-full">إرسال الطلب</button>
+                    <p id="form-status" class="hidden text-center font-bold" role="status"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gold/15 bg-ink">
+        <div class="mx-auto max-w-6xl px-5 py-10 text-center text-sm text-white/50">
+            <p class="font-display text-xl gold-text">{sheikh}</p>
+            <p class="mt-3">للروحانيات وفك السحر وعلاجه — جلب الحبيب — رد المطلقة</p>
+            <p class="mx-auto mt-4 max-w-2xl text-xs leading-relaxed text-white/35">
+                الخدمات المقدّمة روحانية واستشارية ولا تُغني عن الاستشارة الطبية أو النفسية المتخصصة عند الحاجة.
+            </p>
+            <p class="mt-4">© {new Date().getFullYear()} جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contact-form') as HTMLFormElement;
+        const status = document.getElementById('form-status')!;
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button')!;
+            btn.disabled = true;
+            btn.textContent = 'جارٍ الإرسال...';
+            try {
+                const res = await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(new FormData(form) as any).toString()
+                });
+                if (!res.ok) throw new Error();
+                form.reset();
+                status.textContent = 'تم إرسال طلبك بنجاح، سيتواصل معك الشيخ قريبًا بإذن الله.';
+                status.className = 'text-center font-bold text-gold';
+            } catch {
+                status.textContent = 'حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.';
+                status.className = 'text-center font-bold text-red-400';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'إرسال الطلب';
+            }
+        });
+    </script>
 </Layout>
