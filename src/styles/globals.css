@@ -1,78 +1,46 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-primary: #f67280;
-    --color-primary-content: #101828;
-    --color-complementary: #355c7d;
-    --background-image-noise: linear-gradient(
-            to bottom,
-            color-mix(in oklab, var(--color-gray-950) 0%, transparent),
-            color-mix(in oklab, var(--color-gray-950) 100%, transparent)
-        ),
-        url('/images/noise.png');
+    --font-sans: 'Tajawal', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Amiri', serif;
+    --color-ink: #0d1a17;
+    --color-deep: #12251f;
+    --color-gold: #d4af6a;
+    --color-gold-soft: #ecd9ad;
 }
 
 @layer base {
-    h1 {
-        @apply text-4xl font-bold tracking-tight sm:text-5xl;
-    }
-
-    h2 {
-        @apply text-2xl font-bold sm:text-3xl;
-    }
-
-    a:not(.btn) {
-        @apply underline transition hover:opacity-80;
-    }
-
-    pre {
-        @apply p-6 overflow-x-auto rounded-lg;
-    }
-
-    :not(pre) > code {
-        @apply px-1 py-0.5 font-mono rounded bg-gray-900 text-primary;
-        font-size: 0.9em;
+    html { scroll-behavior: smooth; }
+    body {
+        background:
+            radial-gradient(ellipse at top, rgba(212, 175, 106, 0.12), transparent 60%),
+            var(--color-ink);
     }
 }
 
-@layer components {
-    .markdown {
-        > * {
-            @apply my-6;
-        }
+.pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23d4af6a' stroke-opacity='0.09'%3E%3Cpath d='M40 4l10 26 26 10-26 10-10 26-10-26L4 40l26-10z'/%3E%3Ccircle cx='40' cy='40' r='14'/%3E%3C/g%3E%3C/svg%3E");
+}
 
-        :where(h1, h2) {
-            @apply mt-12 mb-6;
-        }
+.gold-text {
+    background: linear-gradient(180deg, #f5e6c0, #d4af6a 55%, #a8823e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
 
-        > :first-child {
-            @apply mt-0;
-        }
+.card {
+    @apply rounded-2xl border border-gold/20 bg-deep/70 p-7 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-gold/50;
+}
 
-        > :last-child {
-            @apply mb-0;
-        }
-    }
+.btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3 font-bold text-ink transition hover:bg-gold-soft;
+}
 
-    .btn {
-        @apply inline-flex items-center justify-center gap-2 bg-primary text-primary-content cursor-pointer text-center font-semibold no-underline transition-colors;
-        padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
-        font-size: var(--btn-font-size, 0.875rem);
-        border-radius: var(--btn-border-radius, 0.25rem);
+.btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold/60 px-7 py-3 font-bold text-gold-soft transition hover:bg-gold/10;
+}
 
-        &:hover {
-            @apply bg-primary/85;
-        }
-
-        &:disabled {
-            @apply text-gray-400 bg-gray-700;
-        }
-    }
-
-    .btn-lg {
-        --btn-font-size: 1.125rem;
-        --btn-px: 1.5rem;
-        --btn-py: 1.125rem;
-    }
+.field {
+    @apply w-full rounded-xl border border-gold/25 bg-ink/60 px-4 py-3 text-white placeholder:text-white/40 focus:border-gold focus:outline-none;
 }
