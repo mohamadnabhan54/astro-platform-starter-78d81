@@ -14,14 +14,50 @@ const nav = [
     { href: '#contact', label: 'تواصل معنا' }
 ];
 
-const services = [
-    { icon: '✦', title: 'فك السحر', text: 'الكشف عن أعراض السحر بأنواعه، والعمل على فكّه وإبطال أثره بالرقية والأذكار والتحصين.' },
-    { icon: '☾', title: 'علاج السحر', text: 'برنامج علاجي متكامل يشمل الرقية الشرعية والتحصين اليومي ومتابعة الحالة حتى الاطمئنان.' },
-    { icon: '♥', title: 'جلب الحبيب', text: 'إصلاح ما انقطع بين القلوب، وتقريب المودة والمحبة بين المتحابين بالطرق الروحانية.' },
-    { icon: '❖', title: 'رد المطلقة', text: 'المساعدة في لمّ شمل الأسرة، وإزالة أسباب الخلاف والنفور، وعودة الوئام بين الزوجين.' },
-    { icon: '◈', title: 'علاج العين والحسد', text: 'تشخيص أعراض العين والحسد، والرقية والتحصين لرفع أثرها عن النفس والبيت والرزق.' },
-    { icon: '✧', title: 'تيسير الزواج والرزق', text: 'إزالة العوائق وتأخر الزواج، وفتح أبواب الرزق والتوفيق بإذن الله.' }
+const serviceGroups = [
+    {
+        name: 'فك السحر والعلاج الروحاني',
+        items: [
+            { icon: '✦', title: 'فك السحر', text: 'الكشف عن أعراض السحر بأنواعه، والعمل على فكّه وإبطال أثره بالرقية والأذكار والتحصين.' },
+            { icon: '☾', title: 'علاج السحر', text: 'برنامج علاجي متكامل يشمل الرقية الشرعية والتحصين اليومي ومتابعة الحالة حتى الاطمئنان.' },
+            { icon: '✺', title: 'فك السحر المأكول والمشروب', text: 'التعامل مع أعراض السحر المأكول والمشروب وتنظيف أثره بالرقية والبرنامج العلاجي.' },
+            { icon: '◈', title: 'علاج العين والحسد', text: 'تشخيص أعراض العين والحسد، والرقية لرفع أثرها عن النفس والبيت والرزق.' },
+            { icon: '✶', title: 'علاج المس الروحاني', text: 'رقية ومتابعة لحالات المس وما يصاحبها من أعراض وضيق وتعب روحاني.' },
+            { icon: '☽', title: 'الكشف الروحاني', text: 'جلسة لفهم الحالة وأعراضها وتحديد طبيعتها قبل البدء بأي علاج.' },
+            { icon: '✧', title: 'الرقية الشرعية', text: 'جلسات رقية بالقرآن الكريم والأدعية المأثورة، حضوريًا أو عن بُعد.' }
+        ]
+    },
+    {
+        name: 'المحبة والعلاقات',
+        items: [
+            { icon: '♥', title: 'جلب الحبيب', text: 'إصلاح ما انقطع بين القلوب، وتقريب المودة والمحبة بين المتحابين.' },
+            { icon: '❤', title: 'المحبة والقبول', text: 'تقوية المحبة والقبول بين الناس، وكسب الود في الأسرة والعمل.' },
+            { icon: '❦', title: 'رد الحبيب الغائب', text: 'المساعدة في عودة الحبيب الغائب أو المبتعد وإزالة أسباب الجفاء.' },
+            { icon: '✿', title: 'إزالة الكره والنفور', text: 'علاج أسباب الكره والنفور المفاجئ بين المحبين أو الأقارب.' }
+        ]
+    },
+    {
+        name: 'الزواج والأسرة',
+        items: [
+            { icon: '❖', title: 'رد المطلقة', text: 'المساعدة في لمّ شمل الأسرة، وإزالة أسباب الخلاف، وعودة الوئام بين الزوجين.' },
+            { icon: '⚭', title: 'رد الزوج الغائب', text: 'السعي في عودة الزوج الغائب أو الهاجر إلى بيته وأسرته.' },
+            { icon: '❀', title: 'إصلاح المشاكل الزوجية', text: 'حل الخلافات المتكررة بين الزوجين، وإعادة المودة والسكينة إلى البيت.' },
+            { icon: '✾', title: 'تيسير الزواج وفك التعطيل', text: 'إزالة العوارض والتعطيل وتأخر الزواج للبنات والشباب بإذن الله.' },
+            { icon: '⌂', title: 'حل المشاكل الأسرية', text: 'إصلاح ذات البين بين الأهل والأقارب وإزالة أسباب القطيعة.' }
+        ]
+    },
+    {
+        name: 'الرزق والتوفيق والتحصين',
+        items: [
+            { icon: '✪', title: 'فتح الرزق والتجارة', text: 'إزالة أسباب ضيق الرزق وتعطّل التجارة، وفتح أبواب البركة والتوفيق.' },
+            { icon: '★', title: 'التوفيق في الدراسة والعمل', text: 'تيسير الأمور وإزالة العوائق أمام النجاح في الدراسة والعمل.' },
+            { icon: '♛', title: 'الهيبة والقبول', text: 'تعزيز الهيبة والقبول والحضور بين الناس وفي مجالات العمل.' },
+            { icon: '⛨', title: 'تحصين النفس والبيت', text: 'برنامج تحصين للشخص والأسرة والمنزل من السحر والعين والحسد.' },
+            { icon: '☁', title: 'علاج الأرق والكوابيس الروحانية', text: 'علاج الكوابيس المتكررة والضيق الروحاني وقلة النوم المرتبطة بها.' }
+        ]
+    }
 ];
+const services = serviceGroups.flatMap((g) => g.items);
 
 const steps = [
     { n: '١', title: 'تواصل معنا', text: 'املأ النموذج أو راسلنا واذكر حالتك باختصار.' },
@@ -81,17 +117,29 @@ const faqs = [
         <section id="services" class="mx-auto max-w-6xl scroll-mt-24 px-5 py-24">
             <div class="text-center">
                 <p class="text-sm tracking-widest text-gold">خدماتنا</p>
-                <h2 class="mt-3 font-display text-4xl font-bold sm:text-5xl">مجالات العلاج الروحاني</h2>
+                <h2 class="mt-3 font-display text-4xl font-bold sm:text-5xl">كافة خدمات الشيخ الروحاني</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-white/60">جميع الخدمات متاحة حضوريًا أو عن بُعد، مع سرّية تامة ومتابعة شخصية لكل حالة.</p>
             </div>
-            <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {services.map((s) => (
-                    <article class="card">
-                        <div class="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-2xl text-gold">{s.icon}</div>
-                        <h3 class="mt-5 font-display text-2xl font-bold text-gold-soft">{s.title}</h3>
-                        <p class="mt-3 leading-loose text-white/65">{s.text}</p>
-                    </article>
-                ))}
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                {serviceGroups.map((g, i) => <a href={`#group-${i}`} class="btn-outline !px-5 !py-2 text-sm no-underline">{g.name}</a>)}
             </div>
+            {serviceGroups.map((g, i) => (
+                <div id={`group-${i}`} class="mt-16 scroll-mt-28">
+                    <h3 class="flex items-center gap-4 font-display text-3xl font-bold text-gold-soft">
+                        <span class="h-px flex-1 bg-gold/25"></span>{g.name}<span class="h-px flex-1 bg-gold/25"></span>
+                    </h3>
+                    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {g.items.map((s) => (
+                            <article class="card flex flex-col">
+                                <div class="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-2xl text-gold">{s.icon}</div>
+                                <h4 class="mt-5 font-display text-2xl font-bold text-gold-soft">{s.title}</h4>
+                                <p class="mt-3 grow leading-loose text-white/65">{s.text}</p>
+                                <a href={`https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(`السلام عليكم شيخ حسن، أريد استشارة بخصوص: ${s.title}`)}`} target="_blank" rel="noopener" class="mt-5 text-sm font-bold text-[#25D366] no-underline">اطلب هذه الخدمة عبر واتساب ←</a>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            ))}
         </section>
 
         <!-- About -->
@@ -180,7 +228,7 @@ const faqs = [
                     <label class="block">
                         <span class="mb-2 block text-sm text-gold-soft">نوع الحالة</span>
                         <select name="service" class="field">
-                            {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                            {serviceGroups.map((g) => <optgroup label={g.name}>{g.items.map((s) => <option value={s.title}>{s.title}</option>)}</optgroup>)}
                             <option value="أخرى">أخرى</option>
                         </select>
                     </label>
