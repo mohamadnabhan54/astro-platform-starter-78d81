@@ -10,6 +10,7 @@ const nav = [
     { href: '#services', label: 'الخدمات' },
     { href: '#about', label: 'عن الشيخ' },
     { href: '#steps', label: 'خطوات التواصل' },
+    { href: '#gallery', label: 'معرض الصور' },
     { href: '#faq', label: 'أسئلة شائعة' },
     { href: '#contact', label: 'تواصل معنا' }
 ];
@@ -57,6 +58,8 @@ const serviceGroups = [
         ]
     }
 ];
+const gallery = Array.from({ length: 13 }, (_, i) => `/images/gallery/${String(i + 1).padStart(2, '0')}.webp`);
+const videos = ['/videos/video-1.mp4', '/videos/video-2.mp4'];
 const services = serviceGroups.flatMap((g) => g.items);
 
 const steps = [
@@ -145,10 +148,10 @@ const faqs = [
         <!-- About -->
         <section id="about" class="scroll-mt-24 border-y border-gold/15 bg-deep/60">
             <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-24 md:grid-cols-2">
-                <div class="pattern flex aspect-square items-center justify-center rounded-3xl border border-gold/25">
-                    <div class="text-center">
-                        <p class="font-display text-8xl gold-text">ح</p>
-                        <p class="mt-4 font-display text-3xl text-gold-soft">{sheikh}</p>
+                <div class="relative aspect-square overflow-hidden rounded-3xl border border-gold/25">
+                    <img src="/images/gallery/01.webp" alt={sheikh} class="h-full w-full object-cover" loading="lazy" />
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-6 pt-20 text-center">
+                        <p class="font-display text-3xl gold-text">{sheikh}</p>
                     </div>
                 </div>
                 <div>
@@ -180,6 +183,29 @@ const faqs = [
                         <p class="mt-2 text-sm leading-loose text-white/60">{s.text}</p>
                     </div>
                 ))}
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="scroll-mt-24 border-t border-gold/15 bg-deep/60">
+            <div class="mx-auto max-w-6xl px-5 py-24">
+                <div class="text-center">
+                    <p class="text-sm tracking-widest text-gold">معرض الصور</p>
+                    <h2 class="mt-3 font-display text-4xl font-bold sm:text-5xl">من أعمال الشيخ</h2>
+                </div>
+                <div class="mt-14 columns-2 gap-4 sm:columns-3 lg:columns-4 [&>*]:mb-4">
+                    {gallery.map((src, i) => (
+                        <button type="button" data-lightbox={src} class="block w-full overflow-hidden rounded-2xl border border-gold/20 transition hover:border-gold/60">
+                            <img src={src} alt={`صورة ${i + 1} – ${sheikh}`} loading="lazy" class="w-full transition duration-500 hover:scale-105" />
+                        </button>
+                    ))}
+                </div>
+                <h3 class="mt-20 text-center font-display text-3xl font-bold text-gold-soft">فيديوهات</h3>
+                <div class="mx-auto mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
+                    {videos.map((v) => (
+                        <video src={v} controls preload="metadata" playsinline class="w-full rounded-2xl border border-gold/25 bg-black"></video>
+                    ))}
+                </div>
             </div>
         </section>
 
@@ -260,7 +286,21 @@ const faqs = [
         <Fragment set:html={waIcon} />
     </a>
 
+    <div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/90 p-4">
+        <button type="button" id="lightbox-close" aria-label="إغلاق" class="absolute top-4 right-4 text-4xl text-white">×</button>
+        <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-full rounded-xl" />
+    </div>
+
     <script>
+        const lb = document.getElementById('lightbox')!;
+        const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+        const closeLb = () => { lb.classList.add('hidden'); lb.classList.remove('flex'); };
+        document.querySelectorAll<HTMLElement>('[data-lightbox]').forEach((el) =>
+            el.addEventListener('click', () => { lbImg.src = el.dataset.lightbox!; lb.classList.remove('hidden'); lb.classList.add('flex'); })
+        );
+        lb.addEventListener('click', (e) => { if (e.target !== lbImg) closeLb(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+
         const form = document.getElementById('contact-form') as HTMLFormElement;
         const status = document.getElementById('form-status')!;
         form.addEventListener('submit', async (e) => {
