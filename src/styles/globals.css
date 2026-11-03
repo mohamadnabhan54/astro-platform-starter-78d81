@@ -44,3 +44,59 @@
 .field {
     @apply w-full rounded-xl border border-gold/25 bg-ink/60 px-4 py-3 text-white placeholder:text-white/40 focus:border-gold focus:outline-none;
 }
+
+/* Hero animated banner */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.4s ease-in-out;
+}
+.hero-slide.is-active {
+    opacity: 1;
+    animation: hero-zoom 7s ease-out forwards;
+}
+@keyframes hero-zoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.15); }
+}
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    display: none;
+    height: 3rem;
+    width: 3rem;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--color-gold) 40%, transparent);
+    background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+    color: var(--color-gold-soft);
+    font-size: 2rem;
+    line-height: 1;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+}
+.hero-arrow:hover { background: color-mix(in srgb, var(--color-gold) 25%, transparent); }
+@media (min-width: 768px) { .hero-arrow { display: flex; } }
+.hero-dot {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.35);
+    transition: all 0.3s;
+}
+.hero-dot.is-active {
+    width: 1.75rem;
+    background: var(--color-gold);
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide { transition: none; }
+    .hero-slide.is-active { animation: none; transform: none; }
+}
